@@ -54,4 +54,3 @@ keymap('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = t
 keymap('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 vim.wo.relativenumber = true
-
