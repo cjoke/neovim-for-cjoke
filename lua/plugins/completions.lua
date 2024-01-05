@@ -19,17 +19,17 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
-				formatting = {
-					format = require("lspkind").cmp_format({
-						mode = "symbol",
-						maxwidth = 100,
-						ellipsis_char = "...",
-						symbol_map = { Codeium = "" },
-					}),
-				},
-				experimental = {
-					ghost_text = { hl_group = "Comment" },
-				},
+				-- formatting = {
+				--	format = require("lspkind").cmp_format({
+				--		mode = "symbol",
+				--		maxwidth = 100,
+				--		ellipsis_char = "...",
+				--		symbol_map = { Codeium = "" },
+				--	}),
+				-- },
+				-- experimental = {
+				--	ghost_text = { hl_group = "Comment" },
+				-- },
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
@@ -47,7 +47,7 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "codeium" },
+					-- { name = "codeium" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" }, -- For luasnip users.
 				}, {
