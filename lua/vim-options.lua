@@ -23,15 +23,6 @@ keymap("v", ">", ">gv", opts)
 keymap("n", "Q", "<cmd>bdelete!<CR>", opts)
 keymap("n", "<leader>c", "<cmd>bd!<CR>", opts)
 
--- telescope bufferlist
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>b",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal'})<cr>",
-  opts
-)
-
-
 -- Resize windows/buffers with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -54,3 +45,4 @@ keymap('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = t
 keymap('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 vim.wo.relativenumber = true
+
