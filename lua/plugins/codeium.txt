@@ -1,3 +1,6 @@
+-- just rename file extention to codeium.lua to work.
+-- and do the thing in completions.lua to activate the cmp stuff
+
 return {
   {
     "Exafunction/codeium.vim",

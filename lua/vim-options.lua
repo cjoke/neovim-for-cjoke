@@ -38,21 +38,18 @@ vim.opt.shiftwidth = 2
 vim.opt.sidescrolloff = 8
 vim.opt.scrolloff = 0
 vim.opt.guifont = "monospace:h17"
-vim.opt.title = true
-vim.opt.titleold = vim.split(os.getenv("SHELL") or "", "/")[3]
-vim.opt.fillchars = vim.opt.fillchars + "eob: "
-vim.opt.shortmess:append("c")
+
 
 -- Set up codeium config
 -- disable codeium default bindings
-vim.g.codeium_disable_bindings = 1
+-- vim.g.codeium_disable_bindings = 1
 -- set codeium filetypes to enable/disable
-vim.g.codeium_filetypes = {
-	["*"] = false,
-	["python"] = true,
-	["c"] = true,
-	["cpp"] = true,
-}
+-- vim.g.codeium_filetypes = {
+-- 	["*"] = false,
+-- 	["python"] = true,
+-- 	["c"] = true,
+-- 	["cpp"] = true,
+-- }
 
 -- Set line numbers
 vim.wo.number = true
