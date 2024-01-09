@@ -29,7 +29,9 @@ return {
 			lspconfig.lua_ls.setup({
 				abilities = capabilities,
 			})
-
+			lspconfig.pyright.setup({
+				abilities = capabilities,
+			})
 			local keymap = vim.keymap.set
 			keymap("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
 			keymap("n", "<leader>gd", vim.lsp.buf.definition, { desc = "[G]o to [D]efinition" })

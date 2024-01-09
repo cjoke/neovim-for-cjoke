@@ -1,5 +1,5 @@
 return {
   {
-    "gptlang/CopilotChat.nvim"
+    "cjoke/CopilotChat.nvim"
   },
 }
