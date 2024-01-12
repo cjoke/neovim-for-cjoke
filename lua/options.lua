@@ -1,6 +1,6 @@
 -- set mapleader to space
 vim.g.mapleader = " "
-vim.g.python3_host_prog = "~/.pyenv/versions/nvim/bin/python"
+vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim/bin/python"
 
 -- Set up copilot config
 vim.g.copilot_no_tab_maps = true
@@ -10,6 +10,7 @@ vim.g.copilot_filetypes = {
 	["python"] = true,
 	["c"] = true,
 	["cpp"] = true,
+	["bash"] = true,
   -- ["lua"] = true,
   -- markdown is needed for CopilotChat
   ["Markdown"] = true,

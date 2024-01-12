@@ -16,8 +16,11 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- delete current buffer
-keymap("n", "Q", "<cmd>bdelete!<CR>", opts)
-keymap("n", "<leader>c", "<cmd>bd!<CR>", opts)
+keymap("n", "<leader>q", "<cmd>bd!<CR>", opts)
+
+-- buffer scrolling
+keymap("n", "<leader>bn", "<cmd>bnext<CR>", opts)
+keymap("n", "<leader>bp", "<cmd>bprevious<CR>", opts)
 
 -- Resize windows/buffers with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)

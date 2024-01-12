@@ -27,10 +27,10 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.lua_ls.setup({
-				abilities = capabilities,
+			  cabilities = capabilities,
 			})
 			lspconfig.pyright.setup({
-				abilities = capabilities,
+			  cabilities = capabilities,
 			})
 			local keymap = vim.keymap.set
 			keymap("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })

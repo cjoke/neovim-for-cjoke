@@ -1,5 +1,5 @@
 return {
   {
     "cjoke/CopilotChat.nvim"
-  },
+  }
 }
