@@ -1,5 +1,7 @@
 -- set mapleader to space
 vim.g.mapleader = " "
+
+-- what env neovim would run in.
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim/bin/python"
 
 -- Set up copilot config
@@ -21,7 +23,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.timeoutlen = 300
-
+vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.updatetime = 100
 vim.opt.termguicolors = true
