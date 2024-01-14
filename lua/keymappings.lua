@@ -62,7 +62,6 @@ keymap("i", "<C-h>", function()
 	return vim.fn["codeium#Clear"]()
 end, { expr = true, silent = true })
 
-
 -- Zen Mode
 vim.api.nvim_set_keymap("n", "<leader>zn", ":TZNarrow<CR>", {})
 vim.api.nvim_set_keymap("v", "<leader>zn", ":'<,'>TZNarrow<CR>", {})
