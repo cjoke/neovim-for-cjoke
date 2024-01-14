@@ -20,6 +20,7 @@ return {
       end, { expr = true, silent = true })
     end,
   },
+
   -- {
   --	"cjoke/codeium.nvim",
   --	dependencies = {
@@ -29,5 +30,15 @@ return {
   --	config = function()
   --		require("codeium").setup({})
   --	end,
+  -- },
+  -- Set up codeium config
+  -- disable codeium default bindings
+  -- vim.g.codeium_disable_bindings = 1
+  -- set codeium filetypes to enable/disable
+  -- vim.g.codeium_filetypes = {
+  -- 	["*"] = false,
+  -- 	["python"] = true,
+  -- 	["c"] = true,
+  -- 	["cpp"] = true,
   -- },
 }
