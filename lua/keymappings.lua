@@ -30,9 +30,9 @@ keymap("v", ">", ">gv", opts)
 -- delete current buffer
 keymap("n", "<leader>q", "<cmd>bd!<CR>", opts)
 
--- buffer scrolling
-keymap("n", "<leader>bn", "<cmd>bnext<CR>", opts)
+-- buffer previous/next 
 keymap("n", "<leader>bp", "<cmd>bprevious<CR>", opts)
+keymap("n", "<leader>bn", "<cmd>bnext<CR>", opts)
 
 -- Resize windows/buffers with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -65,6 +65,9 @@ end, { expr = true, silent = true })
 -- Zen Mode
 vim.api.nvim_set_keymap("n", "<leader>zn", ":TZNarrow<CR>", {})
 vim.api.nvim_set_keymap("v", "<leader>zn", ":'<,'>TZNarrow<CR>", {})
-vim.api.nvim_set_keymap("n", "<leader>sm", ":TZFocus<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>zf", ":TZFocus<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>zm", ":TZMinimalist<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>za", ":TZAtaraxis<CR>", {})
+
+-- Symbols-outline
+keymap("n", "<leader>so", ":SymbolsOutline<CR>", opts)
