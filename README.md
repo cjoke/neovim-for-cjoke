@@ -1,4 +1,5 @@
-### cjokes nvim config. 
+# cjokes nvim config. 
+
 This is a fork from cpow/neovim-for-newbs, I did breake out and started to 
 do my own research/voyage pretty early. It's been some commits and pushes.
 
@@ -13,6 +14,22 @@ cool things doing development with python language.
 For debugging in python, you will need to install debugpy package 
 and check out the keymappings <leader>d-(t,c,o,x)
 with dap-ui it looks awesome =)
+
+To use all of the configuration in my repo, there are some packages you will 
+need to install from your package manager.
+In my case this is aptitude or apt from debian. packages I remember that is needed
+for all configurations is as follow. 
+```
+neovim - latest stable (from github, from debian repos its too old)
+git
+lazygit
+python3-pynvim (if you dont use virtual environment)
+
+```
+I also use pyenv for handling my virtual environments - optional
+
+if you encounter any problems you should check out requirements in the package
+`:checkhealth` is complaining about. 
 
 
 ## Whats installed in mason plugin.
