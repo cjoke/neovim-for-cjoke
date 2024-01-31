@@ -7,6 +7,10 @@ keymap("n", "<leader>ng", ":Neorg workspace general", opts)
 keymap("n", "<leader>nd", ":Neorg workspace develop", opts)
 keymap("n", "<leader>nm", ":Neorg workspace music", opts)
 
+-- Translate text to norwegian
+keymap("v", "<leader>tt", ":Translate no<CR>", opts)
+keymap("n", "<leader>tt", ":Translate no<CR>", opts)
+
 -- clear search highlight on escape
 keymap("n", "<leader>h", ":nohlsearch<CR>")
 
@@ -41,9 +45,9 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- move vertically up/down easier and center cursor
-keymap("n", "<c-j>", "<c-d>", opts)
-keymap("n", "<c-k>", "<c-u>", opts)
-keymap("n", "<c-m>", "<s-m>", opts)
+-- keymap("n", "<c-j>", "<c-d>", opts)
+-- keymap("n", "<c-k>", "<c-u>", opts)
+-- keymap("n", "<c-m>", "<s-m>", opts)
 
 -- keymaps for codeium
 keymap("i", "<C-l>", function()

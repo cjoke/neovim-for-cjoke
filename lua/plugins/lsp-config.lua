@@ -23,6 +23,9 @@ return {
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 			})
+      lspconfig.clangd.setup({
+        capabilities = capabilities,
+      })
 			lspconfig.html.setup({
 				capabilities = capabilities,
 			})
@@ -34,9 +37,9 @@ return {
 			})
 			local keymap = vim.keymap.set
 			keymap("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
-			keymap("n", "<leader>gd", vim.lsp.buf.definition, { desc = "[G]o to [D]efinition" })
-			keymap("n", "<leader>gr", vim.lsp.buf.references, { desc = "[G]o to [R]eference" })
-			keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+			keymap("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+			keymap("n", "<leader>gr", vim.lsp.buf.references, { desc = "Go to Reference" })
+			keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 		end,
 	},
 }

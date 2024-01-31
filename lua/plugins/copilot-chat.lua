@@ -15,9 +15,10 @@ local prompts = {
 
 return {
   -- Import the copilot plugin
-  -- { import = "copilot" },
+  { "github/copilot.vim" },
   {
-    "jellydn/CopilotChat.nvim",
+    dir = IS_DEV and "~/dev/CopilotChat.nvim" or nil,
+    "cjoke/CopilotChat.nvim",
     opts = {
       mode = "split",
       prompts = prompts,

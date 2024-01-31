@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 -- what env neovim would run in.
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim/bin/python"
 
-vim.opt.showtabline = 0
+vim.opt.showtabline = 1
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
