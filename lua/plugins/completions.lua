@@ -71,21 +71,21 @@ return {
 			})
 		end,
 	},
-	{
-		"ibhagwan/fzf-lua",
-		requires = {
-			"vijaymarupudi/nvim-fzf",
-			"kyazdani42/nvim-web-devicons",
-		},
-		config = function()
-			require("fzf-lua").setup({
-				winopts = {
-					win_height = 0.85, -- window height
-					win_width = 0.80, -- window width
-					win_row = 0.30, -- window row position (0=top, 1=bottom)
-					win_col = 0.50, -- window col position (0=left, 1=right)
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"ibhagwan/fzf-lua",
+	-- 	requires = {
+	-- 		"vijaymarupudi/nvim-fzf",
+	-- 		"kyazdani42/nvim-web-devicons",
+	-- 	},
+	-- 	config = function()
+	-- 		require("fzf-lua").setup({
+	-- 			winopts = {
+	-- 				win_height = 0.85, -- window height
+	-- 				win_width = 0.80, -- window width
+	-- 				win_row = 0.30, -- window row position (0=top, 1=bottom)
+	-- 				win_col = 0.50, -- window col position (0=left, 1=right)
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 }
