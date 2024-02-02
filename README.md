@@ -57,13 +57,17 @@ to update changes you need to :UpdateRemotePlugins. The python packages is in
 Remove or make a backup of.  
 
 ``` 
-
-~/.config/nvim
-~/.local/share/nvim
-~/.local/state/nvim
+# remove
+rm -rf ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim
 
 ```
+```
+# copy a backup
+cp -a ~/.config/nvim ~/.config/nvim-backup
+cp -a ~/.local/share/nvim ~/.local/state/nvim-backup
+cp -a ~/.local/share/nvim ~/.local/share/nvim-backup
 
+```
 Now you clone this repository and place it in neovims config directory.
 
 ```
@@ -71,6 +75,9 @@ Now you clone this repository and place it in neovims config directory.
 git clone git@github.com:cjoke/neovim-for-cjoke.git ~/.config/nvim
 
 ```
+To remove this configuration and start from scratch with default neovim config
+repeat the first step and just start neovim.
+
 
 ## Final words
 I have made a virtual environment where I run pynvim which is required for 
