@@ -1,26 +1,26 @@
 # cjokes nvim config. 
 
 This is a fork from cpow/neovim-for-newbs, I did breake out and started to 
-do my own research/voyage pretty early. It's been some commits and pushes.
+do my own research/voyage pretty early. I thought that would be a nice start.
+Where the man also had some good youtube videos about his config aswell.
 
-I did this mainly because the other big neovimdistros where too complicated 
-for me to exstend. Since Im not a lua developer and the documentation is not
-to tutorial. I had to search all over the place and find various configs that 
-I did understand. 
+I forked this because of the other neovim distros where too complicated 
+for me to both understand and exstend.
 
 I have tried to be minimalistic as possible and at the same time have all the 
-cool things doing development with python language. 
+cool things. If you read through the commits you will se that this has been
+a real rollercoaster. I have'nt figured out all things yet. But Im closing in. 
 
-For debugging in python, you will need to install debugpy package 
+For debugging in python, you will need to `pip install debugpy` package 
 and check out the keymappings <leader>d-(t,c,o,x)
-with dap-ui it looks awesome =)
+nvim-dap with dap-ui is awesome.
 
 To use all of the configuration in my repo, there are some packages you will 
-need to install from your package manager.
-In my case this is aptitude or apt from debian. packages I remember that is needed
-for all configurations is as follow. 
+need to install from your package manager and pip.
+
+Some of the plugin authors claim that you will need the latest from neovim
+I use latest stable. 
 ```
-neovim - latest stable (from github, from debian repos its too old)
 git
 lazygit
 python3-pynvim (if you dont use virtual environment)
