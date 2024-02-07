@@ -3,3 +3,4 @@ testfolder
 rplugin/python3/mytestplug.txt
 neorg-help.norg
 .python-version
+*.py~
