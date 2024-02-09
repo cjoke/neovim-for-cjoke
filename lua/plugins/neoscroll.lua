@@ -1,6 +1,6 @@
 return {
   "karb94/neoscroll.nvim",
-  config = function()
+config = function()
     require("neoscroll").setup({})
     local t = {}
     -- Syntax: t[keys] = {function, {function arguments}}
