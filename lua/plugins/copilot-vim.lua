@@ -24,10 +24,10 @@ return {
 
       local keymap = vim.keymap.set
       local opts = { silent = true }
-      keymap('i', '<C-h>', '<Plug>(copilot-dismiss)', opts)
-      keymap('i', '<C-k>', '<Plug>(copilot-next)', opts)
-      keymap('i', '<C-j>', '<Plug>(copilot-previous)', opts)
-      keymap('i', '<C-l>', '<Plug>(copilot-accept-word)', opts)
+      keymap("i", "<C-h>", "<Plug>(copilot-dismiss)", opts)
+      keymap("i", "<C-k>", "<Plug>(copilot-next)", opts)
+      keymap("i", "<C-j>", "<Plug>(copilot-previous)", opts)
+      keymap("i", "<C-l>", "<Plug>(copilot-accept-word)", opts)
     end,
   },
 }

@@ -9,11 +9,11 @@ return {
     config = function()
       require("telescope").setup({
         defaults = {
-          prompt_prefix = '🔭 ', -- prefix for input prompt
+          prompt_prefix = "🔭 ", -- prefix for input prompt
 
           winblend = 5,
 
-          layout_strategy = 'flex',
+          layout_strategy = "flex",
           layout_config = {
             horizontal = {
               preview_width = 0.6,
@@ -35,14 +35,14 @@ return {
 
           use_less = true,
 
-          set_env = { ['COLORTERM'] = 'truecolor' },
+          set_env = { ["COLORTERM"] = "truecolor" },
 
-          file_previewer = require 'telescope.previewers'.vim_buffer_cat.new,
-          grep_previewer = require 'telescope.previewers'.vim_buffer_vimgrep.new,
-          qflist_previewer = require 'telescope.previewers'.vim_buffer_qflist.new,
+          file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+          grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+          qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
           -- Developer configurations: Not meant for general override
-          buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker
+          buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
         },
         extensions = {
           ["ui-select"] = {
