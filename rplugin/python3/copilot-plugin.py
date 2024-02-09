@@ -1,103 +1,64 @@
-import os
-import time
-
-import copilot
-import dotenv
-import prompts
 import pynvim
+from handlers.inplace_chat_handler import InPlaceChatHandler
+from handlers.vsplit_chat_handler import VSplitChatHandler
+from mypynvim.core.nvim import MyNvim
 
-dotenv.load_dotenv()
+PLUGIN_MAPPING_CMD = "CopilotChatMapping"
+PLUGIN_AUTOCMD_CMD = "CopilotChatAutocmd"
 
 
 @pynvim.plugin
-class CopilotChatPlugin(object):
+class CopilotPlugin(object):
     def __init__(self, nvim: pynvim.Nvim):
-        self.nvim = nvim
-        self.copilot = copilot.Copilot(os.getenv("COPILOT_TOKEN"))
-        if self.copilot.github_token is None:
-            req = self.copilot.request_auth()
-            self.nvim.out_write(
-                f"Please visit {req['verification_uri']} and enter the code {req['user_code']}\n"
-            )
-            current_time = time.time()
-            wait_until = current_time + req["expires_in"]
-            while self.copilot.github_token is None:
-                self.copilot.poll_auth(req["device_code"])
-                time.sleep(req["interval"])
-                if time.time() > wait_until:
-                    self.nvim.out_write("Timed out waiting for authentication\n")
-                    return
-            self.nvim.out_write("Successfully authenticated with Copilot\n")
-        self.copilot.authenticate()
+        self.nvim: MyNvim = MyNvim(nvim, PLUGIN_MAPPING_CMD, PLUGIN_AUTOCMD_CMD)
+        self.vsplit_chat_handler = None
+        self.inplace_chat_handler = None
+
+    def init_vsplit_chat_handler(self):
+        if self.vsplit_chat_handler is None:
+            self.vsplit_chat_handler = VSplitChatHandler(self.nvim)
 
     @pynvim.command("CopilotChat", nargs="1")
-    def copilotChat(self, args: list[str]):
-        if self.copilot.github_token is None:
-            self.nvim.out_write("Please authenticate with Copilot first\n")
-            return
+    def copilot_agent_cmd(self, args: list[str]):
+        self.init_vsplit_chat_handler()
+        if self.vsplit_chat_handler:
+            file_type = self.nvim.current.buffer.options["filetype"]
+            self.vsplit_chat_handler.vsplit()
+            # Get code from the unnamed register
+            code = self.nvim.eval("getreg('\"')")
+            self.vsplit_chat_handler.chat(args[0], file_type, code)
 
-        # Start the spinner
-        self.nvim.exec_lua('require("CopilotChat.spinner").show()')
+    @pynvim.command("CopilotChatVisual", nargs="1", range="")
+    def copilot_agent_visual_cmd(self, args: list[str], range: list[int]):
+        self.init_vsplit_chat_handler()
+        if self.vsplit_chat_handler:
+            file_type = self.nvim.current.buffer.options["filetype"]
+            code_lines = self.nvim.current.buffer[range[0] - 1 : range[1]]
+            code = "\n".join(code_lines)
+            self.vsplit_chat_handler.vsplit()
+            self.vsplit_chat_handler.chat(args[0], file_type, code)
 
-        prompt = " ".join(args)
-        if prompt == "/fix":
-            prompt = prompts.FIX_SHORTCUT
-        elif prompt == "/test":
-            prompt = prompts.TEST_SHORTCUT
-        elif prompt == "/explain":
-            prompt = prompts.EXPLAIN_SHORTCUT
+    def init_inplace_chat_handler(self):
+        if self.inplace_chat_handler is None:
+            self.inplace_chat_handler = InPlaceChatHandler(self.nvim)
 
-        # Get code from the unnamed register
-        code = self.nvim.eval("getreg('\"')")
-        file_type = self.nvim.eval("expand('%')").split(".")[-1]
+    # Those commands are used by the plugin, internal use only
+    @pynvim.command(PLUGIN_MAPPING_CMD, nargs="*")
+    def plugin_mapping_cmd(self, args):
+        bufnr, mapping = args
+        self.nvim.key_mapper.execute(bufnr, mapping)
 
-        # Get the view option from the command
-        view_option = self.nvim.eval("g:copilot_chat_view_option")
+    @pynvim.command(PLUGIN_AUTOCMD_CMD, nargs="*")
+    def plugin_autocmd_cmd(self, args):
+        event, id, bufnr = args
+        self.nvim.autocmd_mapper.execute(event, id, bufnr)
 
-        # Check if we're already in a chat buffer
-        if self.nvim.eval("getbufvar(bufnr(), '&buftype')") != "nofile":
-            # Create a new scratch buffer to hold the chat
-            if view_option == "split":
-                self.nvim.command("vnew")
-            else:
-                self.nvim.command("enew")
-            # Set the buffer type to nofile and hide it when it's not active
-            self.nvim.command("setlocal buftype=nofile bufhidden=hide noswapfile")
-            # Set filetype as markdown and wrap with linebreaks
-            self.nvim.command("setlocal filetype=markdown wrap linebreak")
-
-        # Get the current buffer
-        buf = self.nvim.current.buffer
-        self.nvim.api.buf_set_option(buf, "fileencoding", "utf-8")
-
-        # Add start separator
-        start_separator = f"""### User
-{prompt}
-
-### Copilot
-
-"""
-        buf.append(start_separator.split("\n"), -1)
-
-        # Add chat messages
-        for token in self.copilot.ask(prompt, code, language=file_type):
-            buffer_lines = self.nvim.api.buf_get_lines(buf, 0, -1, 0)
-            last_line_row = len(buffer_lines) - 1
-            last_line = buffer_lines[-1]
-            last_line_col = len(last_line.encode("utf-8"))
-
-            self.nvim.api.buf_set_text(
-                buf,
-                last_line_row,
-                last_line_col,
-                last_line_row,
-                last_line_col,
-                token.split("\n"),
-            )
-
-        # Stop the spinner
-        self.nvim.exec_lua('require("CopilotChat.spinner").hide()')
-
-        # Add end separator
-        end_separator = "\n---\n"
-        buf.append(end_separator.split("\n"), -1)
+    @pynvim.command("CopilotChatInPlace", nargs="*", range="")
+    def inplace_cmd(self, args: list[str], range: list[int]):
+        self.init_inplace_chat_handler()
+        if self.inplace_chat_handler:
+            file_type = self.nvim.current.buffer.options["filetype"]
+            code_lines = self.nvim.current.buffer[range[0] - 1 : range[1]]
+            code = "\n".join(code_lines)
+            user_buffer = self.nvim.current.buffer
+            self.inplace_chat_handler.mount(code, file_type, range, user_buffer)

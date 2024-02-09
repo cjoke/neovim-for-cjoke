@@ -15,6 +15,7 @@ def generate_request(
     code_excerpt: str,
     language: str = "",
     system_prompt=prompts.COPILOT_INSTRUCTIONS,
+    model="gpt-4",
 ):
     messages = [
         {
@@ -39,7 +40,7 @@ def generate_request(
         )
     return {
         "intent": True,
-        "model": "gpt-4",
+        "model": model,
         "n": 1,
         "stream": True,
         "temperature": 0.1,

@@ -2,6 +2,7 @@ import json
 import os
 import time
 import uuid
+from typing import Dict, List
 
 import dotenv
 import prompts
@@ -25,8 +26,8 @@ class Copilot:
         if token is None:
             token = utilities.get_cached_token()
         self.github_token = token
-        self.token: dict[str, any] = None
-        self.chat_history: list[typings.Message] = []
+        self.token: Dict[str, any] = None
+        self.chat_history: List[typings.Message] = []
         self.vscode_sessionid: str = None
         self.machineid = utilities.random_hex()
 
@@ -86,22 +87,26 @@ class Copilot:
 
         self.token = self.session.get(url, headers=headers).json()
 
-    def ask(self, prompt: str, code: str, language: str = ""):
+    def ask(
+        self,
+        system_prompt: str,
+        prompt: str,
+        code: str,
+        language: str = "",
+        model: str = "gpt-4",
+    ):
+        if not self.token:
+            self.authenticate()
         # If expired, reauthenticate
         if self.token.get("expires_at") <= round(time.time()):
             self.authenticate()
 
+        if not system_prompt:
+            system_prompt = prompts.COPILOT_INSTRUCTIONS
         url = "https://api.githubcopilot.com/chat/completions"
         self.chat_history.append(typings.Message(prompt, "user"))
-        system_prompt = prompts.COPILOT_INSTRUCTIONS
-        if prompt == prompts.FIX_SHORTCUT:
-            system_prompt = prompts.COPILOT_FIX
-        elif prompt == prompts.TEST_SHORTCUT:
-            system_prompt = prompts.COPILOT_TESTS
-        elif prompt == prompts.EXPLAIN_SHORTCUT:
-            system_prompt = prompts.COPILOT_EXPLAIN
         data = utilities.generate_request(
-            self.chat_history, code, language, system_prompt=system_prompt
+            self.chat_history, code, language, system_prompt=system_prompt, model=model
         )
 
         full_response = ""
@@ -109,6 +114,18 @@ class Copilot:
         response = self.session.post(
             url, headers=self._headers(), json=data, stream=True
         )
+        if response.status_code != 200:
+            error_messages = {
+                401: "Unauthorized. Make sure you have access to Copilot Chat.",
+                500: "Internal server error. Please try again later.",
+                400: "The developer of this plugin has made a mistake. Please report this issue.",
+                419: "You have been rate limited. Please try again later.",
+            }
+            raise Exception(
+                error_messages.get(
+                    response.status_code, f"Unknown error: {response.status_code}"
+                )
+            )
         for line in response.iter_lines():
             line = line.decode("utf-8").replace("data: ", "").strip()
             if line.startswith("[DONE]"):
@@ -188,7 +205,7 @@ def main():
         code = get_input(session, "\n\nCode: \n")
 
         print("\n\nAI Response:")
-        for response in copilot.ask(user_prompt, code):
+        for response in copilot.ask(None, user_prompt, code):
             print(response, end="", flush=True)
 
 

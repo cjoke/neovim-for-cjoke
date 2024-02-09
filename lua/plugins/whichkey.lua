@@ -10,27 +10,25 @@ return {
 			local wk = require("which-key")
 			wk.register({
 				["<leader>"] = {
-          -- This is kinda like a index page for the keybindings
-          -- I use it as extention for the keymappins.lua File
-          -- to show/make the group description instead of the +prefix
-          -- I also extend the functionality of the keymappings.lua file
+					-- This is kinda like a index page for the keybindings
+					-- I use it as extention for the keymappins.lua File
+					-- to show/make the group description instead of the +prefix
+					-- I also extend the functionality of the keymappings.lua file
 					f = {
 						name = "+File stuff/TeleScope",
 						n = { "<cmd>enew<cr>", "New File" },
 					},
 					G = {
 						name = "+Git tools",
-						s = { "<cmd>G<cr>", "Git Status" },
-						d = { "<cmd>G diff<cr>", "Git Diff" },
-						b = { "<cmd>G blame<cr>", "Git Blame" },
-            c = { "<cmd>G commit<cr>", "Git Commit" },
 					},
 					b = {
 						name = "+Buffer stuff",
-						n = { "<cmd>enew<cr>", "New Buffer" },
 						l = { "<cmd>ls<cr>", "List Buffers" },
 					},
 					c = {
+						name = "+Copilot",
+					},
+					cc = {
 						name = "+Copilot",
 					},
 					d = {
