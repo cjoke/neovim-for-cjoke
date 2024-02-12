@@ -1,6 +1,6 @@
 return {
-  {
-    "danmar/cppcheck",
-    enabled = false,
-  },
+	{
+		"danmar/cppcheck",
+		enabled = false,
+	},
 }

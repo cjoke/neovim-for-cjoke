@@ -1,6 +1,7 @@
 import time
 from datetime import datetime
 from typing import Optional, cast
+import os
 
 import prompts as system_prompts
 from copilot import Copilot
@@ -18,10 +19,13 @@ def is_module_installed(name):
 
 # TODO: Abort request if the user closes the layout
 class ChatHandler:
+    has_show_extra_info = False
+
     def __init__(self, nvim: MyNvim, buffer: MyBuffer):
         self.nvim: MyNvim = nvim
         self.copilot: Copilot = None
         self.buffer: MyBuffer = buffer
+        self.proxy: str = os.getenv("HTTPS_PROXY") or os.getenv("ALL_PROXY") or ""
 
     # public
 
@@ -39,6 +43,10 @@ class ChatHandler:
         disable_separators = (
             self.nvim.eval("g:copilot_chat_disable_separators") == "yes"
         )
+        self.proxy = self.nvim.eval("g:copilot_chat_proxy")
+        if "://" not in self.proxy:
+            self.proxy = None
+
         if system_prompt is None:
             system_prompt = self._construct_system_prompt(prompt)
         # Start the spinner
@@ -199,7 +207,7 @@ SYSTEM PROMPT: {num_system_tokens} Tokens
         self, system_prompt: str, prompt: str, code: str, file_type: str, model: str
     ):
         if self.copilot is None:
-            self.copilot = Copilot()
+            self.copilot = Copilot(proxy=self.proxy)
             if self.copilot.github_token is None:
                 req = self.copilot.request_auth()
                 self.nvim.out_write(
@@ -216,6 +224,7 @@ SYSTEM PROMPT: {num_system_tokens} Tokens
                 self.nvim.out_write("Successfully authenticated with Copilot\n")
             self.copilot.authenticate()
 
+        last_line_col = 0
         for token in self.copilot.ask(
             system_prompt, prompt, code, language=cast(str, file_type), model=model
         ):
@@ -224,8 +233,6 @@ SYSTEM PROMPT: {num_system_tokens} Tokens
             )
             buffer_lines = cast(list[str], self.buffer.lines())
             last_line_row = len(buffer_lines) - 1
-            last_line_col = len(buffer_lines[-1])
-
             self.nvim.api.buf_set_text(
                 self.buffer.number,
                 last_line_row,
@@ -234,6 +241,9 @@ SYSTEM PROMPT: {num_system_tokens} Tokens
                 last_line_col,
                 token.split("\n"),
             )
+            last_line_col += len(token.encode("utf-8"))
+            if "\n" in token:
+                last_line_col = 0
 
     def _add_end_separator(self, model: str, disable_separators: bool = False):
         current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -245,7 +255,11 @@ SYSTEM PROMPT: {num_system_tokens} Tokens
 
         end_message = model_info + additional_instructions + disclaimer
 
-        if disable_separators:
+        show_extra = disable_separators or ChatHandler.has_show_extra_info
+
+        if show_extra:
             end_message = "\n" + current_datetime + "\n\n---\n"
+
+        ChatHandler.has_show_extra_info = True
 
         self.buffer.append(end_message.split("\n"))

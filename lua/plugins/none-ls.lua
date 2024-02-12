@@ -8,6 +8,7 @@ return {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.diagnostics.flake8,
         -- null_ls.builtins.diagnostics.cppcheck,
+        null_ls.builtins.diagnostics.clangd,
         null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.formatting.json_tool,
         null_ls.builtins.formatting.prettier,
