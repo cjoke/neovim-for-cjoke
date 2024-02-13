@@ -4,6 +4,7 @@
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
+vim.api.nvim_set_keymap('i', 'qq', '<ESC>', {noremap = true, silent = true})
 -- Git stuff
 keymap("n", "<leader>Gs", ":G<CR>", opts)
 keymap("n", "<leader>Gc", ":G commit<CR>", opts)
