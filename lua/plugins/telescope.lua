@@ -55,7 +55,7 @@ return {
       keymap(
         "n",
         "<leader>fg",
-        ":lua require('telescope.builtin').live_grep()<CR>",
+        ":lua builtin.live_grep()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
