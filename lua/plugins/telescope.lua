@@ -61,79 +61,79 @@ return {
       keymap(
         "n",
         "<leader>fb",
-        ":lua require('telescope.builtin').buffers()<CR>",
+        ":lua builtin.buffers()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fh",
-        ":lua require('telescope.builtin').help_tags()<CR>",
+        ":lua builtin.help_tags()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fd",
-        ":lua require('telescope.builtin').diagnostics()<CR>",
+        ":lua builtin.diagnostics()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fc",
-        ":lua require('telescope.builtin').commands()<CR>",
+        ":lua builtin.commands()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fk",
-        ":lua require('telescope.builtin').keymaps()<CR>",
+        ":lua builtin.keymaps()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fo",
-        ":lua require('telescope.builtin').oldfiles()<CR>",
+        ":lua builtin.oldfiles()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fm",
-        ":lua require('telescope.builtin').man_pages()<CR>",
+        ":lua builtin.man_pages()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>ff",
-        ":lua require('telescope.builtin').find_files()<CR>",
+        ":lua builtin.find_files()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>Gs",
-        ":lua require('telescope.builtin').git_status()<CR>",
+        ":lua builtin.git_status()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fw",
-        ":lua require('telescope.builtin').grep_string()<CR>",
+        ":lua builtin.grep_string()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fl",
-        ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>",
+        ":lua builtin.current_buffer_fuzzy_find()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>ft",
-        ":lua require('telescope.builtin').tags()<CR>",
+        ":lua builtin.tags()<CR>",
         { noremap = true, silent = true }
       )
       keymap(
         "n",
         "<leader>fr",
-        ":lua require('telescope.builtin').lsp_references()<CR>",
+        ":lua builtin.lsp_references()<CR>",
         { noremap = true, silent = true }
       )
     end,
