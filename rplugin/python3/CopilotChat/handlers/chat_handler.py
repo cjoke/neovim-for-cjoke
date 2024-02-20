@@ -1,12 +1,12 @@
+import os
 import time
 from datetime import datetime
 from typing import Optional, cast
-import os
 
-import prompts as system_prompts
-from copilot import Copilot
-from mypynvim.core.buffer import MyBuffer
-from mypynvim.core.nvim import MyNvim
+import CopilotChat.prompts as system_prompts
+from CopilotChat.copilot import Copilot
+from CopilotChat.mypynvim.core.buffer import MyBuffer
+from CopilotChat.mypynvim.core.nvim import MyNvim
 
 
 def is_module_installed(name):
@@ -17,7 +17,7 @@ def is_module_installed(name):
         return False
 
 
-# TODO: Abort request if the user closes the layout
+# TODO: Support Custom Instructions when this issue has been resolved https://github.com/microsoft/vscode-copilot-release/issues/563
 class ChatHandler:
     has_show_extra_info = False
 
@@ -26,6 +26,7 @@ class ChatHandler:
         self.copilot: Copilot = None
         self.buffer: MyBuffer = buffer
         self.proxy: str = os.getenv("HTTPS_PROXY") or os.getenv("ALL_PROXY") or ""
+        self.language = self.nvim.eval("g:copilot_chat_language")
 
     # public
 
@@ -79,6 +80,14 @@ class ChatHandler:
             system_prompt = system_prompts.COPILOT_TESTS
         elif prompt == system_prompts.EXPLAIN_SHORTCUT:
             system_prompt = system_prompts.COPILOT_EXPLAIN
+        if self.language != "":
+            system_prompt = (
+                system_prompts.PROMPT_ANSWER_LANGUAGE_TEMPLATE.substitute(
+                    language=self.language
+                )
+                + "\n"
+                + system_prompt
+            )
         return system_prompt
 
     def _add_start_separator(
@@ -108,6 +117,13 @@ class ChatHandler:
         winnr: int,
         no_annoyance: bool = False,
     ):
+        hide_system_prompt = (
+            self.nvim.eval("g:copilot_chat_hide_system_prompt") == "yes"
+        )
+
+        if hide_system_prompt:
+            system_prompt = "...System prompt hidden..."
+
         if code and not no_annoyance:
             code = f"\n        \nCODE:\n```{file_type}\n{code}\n```"
 
@@ -148,10 +164,16 @@ SYSTEM PROMPT:
 
         encoding = tiktoken.encoding_for_model("gpt-4")
 
+        hide_system_prompt = (
+            self.nvim.eval("g:copilot_chat_hide_system_prompt") == "yes"
+        )
         num_total_tokens = len(encoding.encode(f"{system_prompt}\n{prompt}\n{code}"))
         num_system_tokens = len(encoding.encode(system_prompt))
         num_prompt_tokens = len(encoding.encode(prompt))
         num_code_tokens = len(encoding.encode(code))
+
+        if hide_system_prompt:
+            system_prompt = "... System prompt hidden ..."
 
         if code:
             code = f"\n        \nCODE: {num_code_tokens} Tokens \n```{file_type}\n{code}\n```"
@@ -225,6 +247,26 @@ SYSTEM PROMPT: {num_system_tokens} Tokens
             self.copilot.authenticate()
 
         last_line_col = 0
+        self.nvim.exec_lua(
+            'require("CopilotChat.utils").log_info(...)',
+            f"System prompt: {system_prompt}",
+        )
+        self.nvim.exec_lua(
+            'require("CopilotChat.utils").log_info(...)', f"Prompt: {prompt}"
+        )
+        self.nvim.exec_lua(
+            'require("CopilotChat.utils").log_info(...)', f"Code: {code}"
+        )
+        self.nvim.exec_lua(
+            'require("CopilotChat.utils").log_info(...)', f"File type: {file_type}"
+        )
+        self.nvim.exec_lua(
+            'require("CopilotChat.utils").log_info(...)', f"Model: {model}"
+        )
+        self.nvim.exec_lua(
+            'require("CopilotChat.utils").log_info(...)', "Asking Copilot"
+        )
+        # TODO: Abort request if the user closes the layout
         for token in self.copilot.ask(
             system_prompt, prompt, code, language=cast(str, file_type), model=model
         ):
@@ -244,6 +286,9 @@ SYSTEM PROMPT: {num_system_tokens} Tokens
             last_line_col += len(token.encode("utf-8"))
             if "\n" in token:
                 last_line_col = 0
+        self.nvim.exec_lua(
+            'require("CopilotChat.utils").log_info(...)', "Copilot answered"
+        )
 
     def _add_end_separator(self, model: str, disable_separators: bool = False):
         current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

@@ -1,9 +1,9 @@
-import prompts as system_prompts
-from handlers.chat_handler import ChatHandler
-from mypynvim.core.buffer import MyBuffer
-from mypynvim.core.nvim import MyNvim
-from mypynvim.ui_components.layout import Box, Layout
-from mypynvim.ui_components.popup import PopUp
+import CopilotChat.prompts as system_prompts
+from CopilotChat.handlers.chat_handler import ChatHandler
+from CopilotChat.mypynvim.core.buffer import MyBuffer
+from CopilotChat.mypynvim.core.nvim import MyNvim
+from CopilotChat.mypynvim.ui_components.layout import Box, Layout
+from CopilotChat.mypynvim.ui_components.popup import PopUp
 
 # Define constants for the models
 MODEL_GPT4 = "gpt-4"
@@ -20,6 +20,7 @@ class InPlaceChatHandler:
         self.diff_mode: bool = False
         self.model: str = MODEL_GPT4
         self.system_prompt: str = "SENIOR_DEVELOPER_PROMPT"
+        self.language = self.nvim.eval("g:copilot_chat_language")
 
         # Add user prompts collection
         self.user_prompts = self.nvim.eval("g:copilot_chat_user_prompts")
@@ -231,6 +232,7 @@ class InPlaceChatHandler:
         self.copilot_popup.unmount()
         self.copilot_popup.mount(controlled=True)
 
+    # TODO: Add custom keymaps for in-place chat as suggestion here https://discord.com/channels/1200633211236122665/1200633212041449606/1208065809285382164
     def _set_keymaps(self):
         """Set the keymaps for the chat handler."""
         self.prompt_popup.map("n", "<CR>", lambda: self._chat())
