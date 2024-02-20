@@ -16,26 +16,35 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
 
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "<leader>ss",
+            node_incremental = "<leader>si",
+            scope_incremental = "<leader>sc",
+            node_decremental = "<leader>sd",
+          },
+        },
         textobjects = {
 
           select = {
             enable = true,
-            -- Automatically jump forward to textobj, similar to targets.vim
+            -- automatically jump forward to textobj, similar to targets.vim
             lookahead = true,
 
             keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
+              -- you can use the capture groups defined in textobjects.scm
               -- these works in visualmode (charvise)
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
               ["ac"] = "@class.outer",
-              ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+              ["ic"] = { query = "@class.inner", desc = "select inner part of a class region" },
+              ["as"] = { query = "@scope", query_group = "locals", desc = "select language scope" },
             },
 
             selection_modes = {
               ["@parameter.outer"] = "v", -- charwise
-              ["@function.outer"] = "V", -- linewise
+              ["@function.outer"] = "v", -- linewise
               ["@class.outer"] = "<c-v>", -- blockwise
             },
 
@@ -54,7 +63,7 @@ return {
       keymap({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
       keymap({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
-      -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+      -- optionally, make builtin f, f, t, t also repeatable with ; and ,
       keymap({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
       keymap({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
       keymap({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
