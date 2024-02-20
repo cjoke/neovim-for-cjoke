@@ -41,7 +41,11 @@ keymap("n", "<M-j>", ":wincmd j<CR>", opts)
 keymap("n", "<M-h>", ":wincmd h<CR>", opts)
 keymap("n", "<M-l>", ":wincmd l<CR>", opts)
 
--- Stay in indent mode
+-- Move lines up and down in visual mode
+keymap("v", "J", ":m '>+1<CR>gv=gv")
+keymap("v", "K", ":m '<-2<CR>gv=gv")
+
+-- move intentation left and right
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
@@ -89,6 +93,3 @@ keymap("n", "<leader>so", ":SymbolsOutline<CR>", opts)
 keymap("n", "<leader>|h", ":split<CR>", opts)
 keymap("n", "<leader>|v", ":vsplit<CR>", opts)
 
--- Move lines up and down in visual mode
-keymap("v", "J", ":m '>+1<CR>gv=gv")
-keymap("v", "K", ":m '<-2<CR>gv=gv")
