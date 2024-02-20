@@ -13,8 +13,8 @@ return {
 						config = {
 							workspaces = {
 								general = "~/Documents/Notes/general",
-								work = "~/Documents/Notes/develop",
-								youtube = "~/Documents/Notes/music",
+								dev = "~/Documents/Notes/develop",
+								music = "~/Documents/Notes/music",
 							},
 							default_workspace = "general",
 						},
