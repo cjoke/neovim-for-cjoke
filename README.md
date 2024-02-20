@@ -2,7 +2,7 @@
 
 This is a fork from cpow/neovim-for-newbs, I did breake out and started to 
 do my own research/voyage pretty early. I thought that would be a nice start.
-Where the man also had some good youtube videos about his config aswell.
+Where cpow also had a nice youtube tutorial about his config aswell.
 
 I forked this because of the other neovim distros where too complicated 
 for me to both understand and exstend.
@@ -19,12 +19,12 @@ To use all of the configuration in my repo, there are some packages you will
 need to install from your package manager and pip.
 
 Some of the plugin authors claim that you will need the latest from neovim
-I use latest stable. 
+I use latest stable as for now 0.9.5. 
 ```
 git
 lazygit
 python3-pynvim (if you dont use virtual environment)
-
+copilot subscription (optional)
 ```
 I also use pyenv for handling my virtual environments - optional
 
@@ -51,10 +51,10 @@ mainly linters, languageservers and formatters for the lsp configuration.
 Ive installed CopilotChat.nvim from a fork of the original plugin by gptlang
 to update changes you need to :UpdateRemotePlugins. The python packages is in 
 ~/.config/nvim/rplugin/python3 directory. 
-
+you should set IS_DEV to false unless you fork the plugin and make changes.
 
 ## Howto use this configuration
-Remove or make a backup of.  
+Remove or make a backup.  
 
 ``` 
 # remove
@@ -83,7 +83,7 @@ repeat the first step and just start neovim.
 I have made a virtual environment where I run pynvim which is required for 
 some plugins in neovim. you can make your own environment or just install
 it through your packagemanager. e.g debian/ubuntu `sudo apt install python3-pynvim`
-you should also change the setting in options.lua.
+you should also change the setting in options.lua to point to your own environment you make.
 
 `vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim/bin/python"`
 
