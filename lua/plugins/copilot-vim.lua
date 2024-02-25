@@ -10,7 +10,8 @@ return {
   },
   {
     "github/copilot.vim",
-    -- event = "VeryLazy",
+    -- enabled = false,
+    event = "VeryLazy",
     config = function()
       -- For copilot.vim
       -- enable copilot for specific filetypes
