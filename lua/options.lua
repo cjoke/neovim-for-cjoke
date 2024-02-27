@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim/bin/python"
 
 -- set TMPDIR user env
-vim.env.TMPDIR = "~/.cache/nvim/"
+-- vim.env.TMPDIR = "~/.cache/nvim/"
 vim.opt.showtabline = 1
 vim.opt.expandtab = true
 vim.opt.tabstop = 2

@@ -43,7 +43,7 @@ return {
     },
     opts = {
       language = "norwegian",
-      temperature = 0.2,
+      temperature = 0.1,
       show_help = "yes",
       prompts = prompts,
       debug = false, -- Set to true to see response from Github Copilot API. The log file will be in ~/.local/state/nvim/CopilotChat.nvim.log.
