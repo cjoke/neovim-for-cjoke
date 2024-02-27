@@ -38,6 +38,9 @@ return {
       lspconfig.pyright.setup({
         cabilities = capabilities,
       })
+      lspconfig.ruff_lsp.setup({
+        capabilities = capabilities,
+      })
       local keymap = vim.keymap.set
       keymap("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
       keymap("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
@@ -48,7 +51,6 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
-
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
