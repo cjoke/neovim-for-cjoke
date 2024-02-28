@@ -37,6 +37,7 @@ return {
   {
     dir = IS_DEV and "~/dev/CopilotChat.nvim" or nil,
     "cjoke/CopilotChat.nvim",
+    enabled = true,
     dependencies = {
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
       { "nvim-lua/plenary.nvim" },
