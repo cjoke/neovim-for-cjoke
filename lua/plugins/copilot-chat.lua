@@ -42,7 +42,7 @@ return {
       { "nvim-lua/plenary.nvim" },
     },
     opts = {
-      language = "norwegian",
+      -- language = "norwegian",
       temperature = 0.1,
       show_help = "yes",
       prompts = prompts,
