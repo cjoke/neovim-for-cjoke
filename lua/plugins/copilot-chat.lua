@@ -1,12 +1,11 @@
-local IS_DEV = true
 return {
   {
-    dir = IS_DEV and "~/dev/CopilotChat.nvim" or nil,
     "cjoke/CopilotChat.nvim",
+    branch = "canary",
     dependencies = {
-      { "github/copilot.vim"},
+      {"github/copilot.vim"}, -- or github/copilot.vim
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
-      { "nvim-lua/plenary.nvim" },
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     opts = {
       debug = true, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
@@ -34,9 +33,9 @@ return {
     end,
     event = "VeryLazy",
     keys = {
-      { "<leader>ccb", "<cmd>CopilotChatBuffer ",     desc = "CopilotChat - Chat with current buffer" },
+      { "<leader>ccb", "<cmd>CopilotChatBuffer ", desc = "CopilotChat - Chat with current buffer" },
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
+      { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
       {
         "<leader>ccv",
         ":CopilotChatVisual ",
