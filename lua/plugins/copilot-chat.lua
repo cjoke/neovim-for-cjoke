@@ -4,6 +4,7 @@ return {
     dir = IS_DEV and "~/dev/CopilotChat.nvim" or nil,
     "cjoke/CopilotChat.nvim",
     dependencies = {
+      { "github/copilot.vim"},
       { "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
       { "nvim-lua/plenary.nvim" },
     },
