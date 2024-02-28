@@ -42,12 +42,6 @@ return {
         capabilities = capabilities,
       })
       local keymap = vim.keymap.set
-      keymap("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
-      keymap("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-      keymap("n", "<leader>gr", vim.lsp.buf.references, { desc = "Go to Reference" })
-      keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-      keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
-      keymap("n", "<leader>gf", vim.lsp.buf.format, { desc = "Go Format" })
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
@@ -56,10 +50,14 @@ return {
 
           -- Buffer local mappings.
           local opts = { buffer = ev.buf }
+          keymap("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
+          keymap("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+          keymap("n", "<leader>gr", vim.lsp.buf.references, { desc = "Go to Reference" })
+          keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+          keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+          keymap("n", "<leader>gf", vim.lsp.buf.format, { desc = "Go Format" })
           keymap("n", "gD", vim.lsp.buf.declaration, opts)
-          keymap("n", "gd", vim.lsp.buf.definition, opts)
-          keymap("n", "K", vim.lsp.buf.hover, opts)
-          keymap("n", "gi", vim.lsp.buf.implementation, opts)
+          keymap("n", "<leader>gi", vim.lsp.buf.implementation, opts)
           keymap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
           keymap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
           keymap("n", "<space>wl", function()
@@ -73,6 +71,15 @@ return {
             vim.lsp.buf.format({ async = true })
           end, opts)
         end,
+
+        require('lspconfig').ruff_lsp.setup {
+          init_options = {
+            settings = {
+              -- Any extra CLI arguments for `ruff` go here.
+              args = {},
+            }
+          }
+        }
       })
 
       -- `/` cmdline setup.
