@@ -19,15 +19,16 @@ local prompts = {
 	Concise = "Please rewrite the following text to make it more concise.",
 }
 
+
 return {
 	-- Import the copilot plugin
 	-- { import = "lazyvim.plugins.extras.coding.copilot" },
-	{ "github/copilot.vim" },
 	{
 		dir = IS_DEV and "~/dev/CopilotChat.nvim" or nil,
 		"cjoke/CopilotChat.nvim",
 		branch = "canary",
 		dependencies = {
+      -- { "github/copilot.vim" },
 			{ "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
 			{ "nvim-lua/plenary.nvim" },
 		},
