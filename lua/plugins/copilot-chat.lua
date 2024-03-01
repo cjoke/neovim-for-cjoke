@@ -36,8 +36,6 @@ local prompts = {
 
 
 return {
-	-- Import the copilot plugin
-	-- { import = "lazyvim.plugins.extras.coding.copilot" },
 	{
 		dir = IS_DEV and "~/dev/CopilotChat.nvim" or nil,
 		"cjoke/CopilotChat.nvim",
@@ -66,7 +64,7 @@ return {
 				chat.ask(args.args, {
 					selection = select.visual,
 					window = {
-						layout = "float",
+						layout = "float", --vertical
 						relative = "cursor",
 						width = 1,
 						height = 0.4,
