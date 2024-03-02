@@ -30,6 +30,11 @@ return {
 			keymap("n", "<Leader>dc", ":DapContinue<CR>")
 			keymap("n", "<Leader>dx", ":DapTerminate<CR>")
 			keymap("n", "<Leader>do", ":DapStepOver<CR>")
+      keymap("n", "<Leader>di", ":DapStepInto<CR>")
+      keymap("n", "<Leader>ds", ":DapStepOut<CR>")
+      keymap("n", "<Leader>dr", ":DapReplOpen<CR>")
+      keymap("n", "<Leader>dl", ":DapRunLast<CR>")
+
 			-- from configuration example in :help dap
 			keymap("n", "<F5>", function()
 				require("dap").continue()
