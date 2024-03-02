@@ -95,3 +95,8 @@ keymap("n", "<leader>so", ":SymbolsOutline<CR>", opts)
 keymap("n", "<leader>|h", ":split<CR>", opts)
 keymap("n", "<leader>|v", ":vsplit<CR>", opts)
 
+-- keymappings.lua
+-- local map = vim.api.nvim_set_keymap
+-- map <leader>ms to :Mksession
+-- map('n', '<leader>ms', ':Mksession<CR>', {noremap = true})
+-- map('n', '<leader>ss', ':SourceSession<CR>', {noremap = true})

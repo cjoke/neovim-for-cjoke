@@ -12,36 +12,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("options")
-require("keymappings")
+require("config.options")
+require("config.keymappings")
 require("lazy").setup("plugins")
 
-local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn   -- to call Vim functions e.g. fn.bufnr()
-
-local M = {}
-
-local function session_file_path()
-  local workdir = fn.expand("%:p:h") -- get the directory of the current file
-  return workdir .. "/Session.vim"
-end
-
-function M.save_session()
-  cmd("mksession! " .. session_file_path())
-end
-
-function M.restore_session()
-  if fn.filereadable(session_file_path()) == 1 then
-    cmd("source " .. session_file_path())
-  end
-end
-
-function M.setup()
-  cmd("command! -nargs=0 Mksession lua require('plugins.last-session').save_session()")
-  cmd("command! -nargs=0 SourceSession lua require('plugins.last-session').restore_session()")
-
-  cmd("autocmd VimLeave * Mksession")
-  cmd("autocmd VimEnter * SourceSession")
-end
-
-return M
+-- auto save session
+require('config.last-session').setupSessionManager()
+-- vim.cmd [[ autocmd VimEnter * lua require('config.last-session').restoreLastSession() ]]
