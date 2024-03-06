@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 -- what env neovim would run in.
-vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim/bin/python"
+vim.g.python3_host_prog = "$HOME/.pyenv/versions/3.12.2/bin/python3"
 
 -- set TMPDIR user env
 -- vim.env.TMPDIR = "~/.cache/nvim/"

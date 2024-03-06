@@ -99,4 +99,5 @@ keymap("n", "<leader>|v", ":vsplit<CR>", opts)
 -- local map = vim.api.nvim_set_keymap
 -- map <leader>ms to :Mksession
 -- map('n', '<leader>ms', ':Mksession<CR>', {noremap = true})
--- map('n', '<leader>ss', ':SourceSession<CR>', {noremap = true})
+keymap('n', '<leader>ls', ':LoadSession<CR>', {noremap = true})
+-- keymap('n', '<leader>cd', ':echo expand('%:p')', {noremap = true})
