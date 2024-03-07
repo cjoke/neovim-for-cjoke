@@ -5,3 +5,4 @@ neorg-help.norg
 .python-version
 *.py~
 Session.vim
+lazy-lock.json
