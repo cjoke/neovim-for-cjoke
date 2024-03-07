@@ -1,6 +1,8 @@
 -- set mapleader to space
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- vim.loader.enable()
 -- what env neovim would run in.
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/3.12.2/bin/python3"
 
