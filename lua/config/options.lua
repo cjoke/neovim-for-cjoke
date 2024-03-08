@@ -22,15 +22,16 @@ vim.opt.undofile = true
 vim.opt.updatetime = 100
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
-vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.shiftwidth = 2
 vim.opt.sidescrolloff = 8
 vim.opt.scrolloff = 6
--- vim.opt.guifont = "monospace:h17"
+vim.opt.guifont = "monospace:h17"
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
--- Set line numbers
+-- set line numbers globally
+vim.opt.number = true
+vim.opt.relativenumber = true
+-- Set line numbers on buffers
 vim.wo.number = true
 vim.wo.relativenumber = true
