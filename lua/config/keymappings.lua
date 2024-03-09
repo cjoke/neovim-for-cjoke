@@ -100,4 +100,10 @@ keymap("n", "<leader>|v", ":vsplit<CR>", opts)
 -- map <leader>ms to :Mksession
 -- map('n', '<leader>ms', ':Mksession<CR>', {noremap = true})
 keymap('n', '<leader>ls', ':LoadSession<CR>', {noremap = true})
--- keymap('n', '<leader>cd', ':echo expand('%:p')', {noremap = true})
+
+-- Show the current file path
+function _G.show_current_file_path()
+    print(vim.fn.expand('%:p'))
+end
+-- Map the key to the function
+vim.api.nvim_set_keymap('n', '<leader>cd', ':lua show_current_file_path()<CR>', {noremap = true, silent = true})
