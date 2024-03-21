@@ -6,6 +6,11 @@ vim.g.maplocalleader = " "
 -- what env neovim would run in.
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/3.12.2/bin/python3"
 
+-- In your init.lua file
+vim.cmd [[
+  autocmd FileType python setlocal foldmethod=syntax
+  autocmd FileType python setlocal foldlevel=1
+]]
 -- set TMPDIR user env
 -- vim.env.TMPDIR = "~/.cache/nvim/"
 vim.opt.showtabline = 1

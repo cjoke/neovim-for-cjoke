@@ -14,6 +14,19 @@ return {
 					-- I use it as extention for the keymappins.lua File
 					-- to show/make the group description instead of the +prefix
 					-- I also extend the functionality of the keymappings.lua file
+					a = {
+						name = "+AI",
+					},
+					b = {
+						name = "+Buffer stuff",
+						l = { "<cmd>ls<cr>", "List Buffers" },
+					},
+          br = {
+            name = "+restore buffer",
+          },
+					d = {
+						name = "+Dap tools",
+					},
 					f = {
 						name = "+File stuff/TeleScope",
 						n = { "<cmd>enew<cr>", "New File" },
@@ -36,18 +49,12 @@ return {
 					G = {
 						name = "+Git tools",
 					},
-					b = {
-						name = "+Buffer stuff",
-						l = { "<cmd>ls<cr>", "List Buffers" },
+					g = {
+						name = "+Go to/format",
 					},
-					c = {
-						name = "+Copilot",
-					},
-					cc = {
-						name = "+Copilot",
-					},
-					d = {
-						name = "+Dap tools",
+					l = {
+						name = "+local stuff",
+						s = { "<cmd>LoadSession<CR>", "Load Session" },
 					},
 					n = {
 						name = "+Neorg",
@@ -57,13 +64,6 @@ return {
 					},
 					z = {
 						name = "+Zen mode",
-					},
-					g = {
-						name = "+Go to/format",
-					},
-					l = {
-						name = "+local stuff",
-						s = { "<cmd>LoadSession<CR>", "Load Session" },
 					},
 				},
 			})

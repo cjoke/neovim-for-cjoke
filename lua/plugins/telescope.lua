@@ -23,7 +23,7 @@ return {
 					width = 0.9,
 					preview_cutoff = 120,
 					winblend = 5,
-					layout_strategy = "flex",
+					layout_strategy = "flex", -- flex, horizontal, vertical
 					layout_config = {
 						prompt_position = "bottom",
 						mirror = false,
@@ -54,9 +54,8 @@ return {
 					},
 				},
 			}
-
 			telescope.setup(telescope_config)
-			telescope.load_extension("fzf")
+			-- telescope.load_extension("fzf")
 
 			local mappings = {
 				fg = 'require("telescope.builtin").live_grep',

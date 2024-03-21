@@ -38,9 +38,7 @@ return {
       lspconfig.pyright.setup({
         cabilities = capabilities,
       })
-      lspconfig.ruff_lsp.setup({
-        capabilities = capabilities,
-      })
+
       local keymap = vim.keymap.set
       keymap("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
       keymap("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to Definition" })

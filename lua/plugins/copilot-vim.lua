@@ -10,7 +10,7 @@ return {
   },
   {
     "github/copilot.vim",
-    -- enabled = false,
+    enabled = false,
     event = "VeryLazy",
     config = function()
       -- For copilot.vim

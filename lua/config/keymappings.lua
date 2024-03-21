@@ -20,9 +20,9 @@ keymap("n", "<leader>Ga", ":G add %<CR>", opts)
 keymap("n", "<leader>Gb", ":G blame<CR>", opts)
 
 -- Notes/neorg
-keymap("n", "<leader>ng", ":Neorg workspace general", opts)
-keymap("n", "<leader>nd", ":Neorg workspace develop", opts)
-keymap("n", "<leader>nm", ":Neorg workspace music", opts)
+keymap("n", "<leader>ng", ":Neorg workspace general<CR>", opts)
+keymap("n", "<leader>nd", ":Neorg workspace develop<CR>", opts)
+keymap("n", "<leader>nm", ":Neorg workspace music<CR>", opts)
 
 -- Translate text to norwegian
 keymap("v", "<leader>tt", ":Translate no<CR>", opts)
@@ -54,9 +54,28 @@ keymap("v", ">", ">gv", opts)
 -- delete current buffer
 keymap("n", "<leader>q", "<cmd>bd!<CR>", opts)
 
+-- delete window if split
+keymap("n", "<leader>x", "<cmd>close<CR>", opts)
+
 -- buffer previous/next
 keymap("n", "<leader>bp", "<cmd>bprevious<CR>", opts)
 keymap("n", "<leader>bn", "<cmd>bnext<CR>", opts)
+
+-- geminichat
+keymap('n', '<leader>lg', ':GeminiChat<CR>', opts)
+
+-- todo addtext
+keymap('n', '<leader>la', ':AddText<CR>', opts)
+keymap('n', '<leader>lc', ':AddText code<CR>', opts)
+
+-- set or get language
+keymap('n', '<leader>lS', ':SetLanguage<CR>', opts)
+keymap('n', '<leader>lG', ':GetLanguage<CR>', opts)
+
+-- restore buffers
+keymap("n", "<leader>brm", ":vsplit markdown-buffer<CR>", opts)
+keymap("n", "<leader>brc", ":vsplit copilot-chat<CR>", opts)
+keymap("n", "<leader>brg", ":vsplit gemini-buffer<CR>", opts)
 
 -- Resize windows/buffers with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -68,18 +87,19 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("i", "<C-l>", function()
   return vim.fn["codeium#Accept"]()
 end, { expr = true, silent = true })
-
 keymap("i", "<C-k>", function()
   return vim.fn["codeium#CycleCompletions"](1)
 end, { expr = true, silent = true })
-
 keymap("i", "<C-j>", function()
   return vim.fn["codeium#CycleCompletions"](-1)
 end, { expr = true, silent = true })
-
 keymap("i", "<C-h>", function()
   return vim.fn["codeium#Clear"]()
 end, { expr = true, silent = true })
+keymap("n", "<leader>ac", function()
+  return vim.fn["codeium#Chat"]()
+end, { expr = true, silent = true })
+
 
 -- Zen Mode
 vim.api.nvim_set_keymap("n", "<leader>zn", ":TZNarrow<CR>", {})

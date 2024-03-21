@@ -13,10 +13,10 @@ return {
 						config = {
 							workspaces = {
 								general = "~/Documents/Notes/general",
-								dev = "~/Documents/Notes/develop",
+								develop = "~/Documents/Notes/develop",
 								music = "~/Documents/Notes/music",
 							},
-							default_workspace = "general",
+							default_workspace = "develop",
 						},
 					},
 				},

@@ -1,8 +1,12 @@
 -- highligs related stuff with similar words
 return {
   "RRethy/vim-illuminate",
-  lazy = false,
+  enabled = false,
   config = function()
-    require("illuminate").configure({})
+    -- Autocommands
+    vim.cmd([[
+      autocmd BufEnter * lua require("illuminate").configure({})
+      autocmd FileType python lua require("illuminate").configure({})
+    ]])
   end,
 }
