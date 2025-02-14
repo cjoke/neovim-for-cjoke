@@ -1,6 +1,7 @@
 return {
 	{
 		"folke/which-key.nvim",
+    { 'echasnovski/mini.icons', version = '*' },
 		event = "VeryLazy",
 		init = function()
 			vim.o.timeout = true

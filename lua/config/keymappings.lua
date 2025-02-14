@@ -5,7 +5,7 @@ local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
 
 -- rename CopilotChat to CC
-vim.cmd('command! -nargs=* CC CopilotChat <args>')
+-- vim.cmd('command! -nargs=* CC CopilotChat <args>')
 
 -- Git stuff
 keymap("n", "<leader>Gs", ":G<CR>", opts)
