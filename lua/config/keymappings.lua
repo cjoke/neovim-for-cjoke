@@ -62,7 +62,12 @@ keymap("n", "<leader>bp", "<cmd>bprevious<CR>", opts)
 keymap("n", "<leader>bn", "<cmd>bnext<CR>", opts)
 
 -- geminichat
-keymap('n', '<leader>lg', ':GeminiChat<CR>', opts)
+-- keymap('n', '<leader>lg', ':GeminiChat<CR>', opts)
+
+-- Gen.nvim ollama ai tool
+keymap("n", "<leader>lg", ":Gen<CR>", opts)
+
+
 
 -- todo addtext
 keymap('n', '<leader>la', ':AddText<CR>', opts)
